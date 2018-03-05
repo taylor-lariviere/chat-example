@@ -20,6 +20,8 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
+    clients.push(socket);
+
     socket.on('start', function () {
         socket.emit('nick', "guest" + incr);
         clients[clients.indexOf(socket)].n = "guest" + incr;
@@ -27,7 +29,7 @@ io.on('connection', function (socket) {
         io.emit('users', getUsers());
     });
 
-    socket.on('chat message', function (msg) {
+    socket.on('send chat message', function (msg) {
         io.emit('chat message', msg);
     });
 

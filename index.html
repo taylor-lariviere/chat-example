@@ -102,7 +102,7 @@
 
         $('form').submit(function () {
             var temp = [myNick, $("#m").val()];
-            socket.emit('chat message', temp);
+            socket.emit('send chat message', temp);
             $('#m').val('');
             return false;
         });
