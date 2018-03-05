@@ -72,6 +72,7 @@
 <body>
     <div id="container">
         <section>
+            <p>Messages</p>
             <ul id="messages"></ul>
         </section>
         <footer>
@@ -99,6 +100,13 @@
             myNick = nick;
         });
 
+        $('form').submit(function () {
+            var temp = [myNick, $("#m").val()];
+            socket.emit('chat message', temp);
+            $('#m').val('');
+            return false;
+        });
+
         socket.on('chat message', function (msg) {
             $("#messages").append("<li><b>" + msg[0] + ":</b> " + msg[1]);
             window.scrollTo(0, document.body.scrollHeight);
@@ -119,12 +127,7 @@
             }
         }
 
-        $('form').submit(function () {
-            var temp = [myNick, $("#m").val()];
-            socket.emit('chat message', temp);
-            $('#m').val('');
-            return false;
-        });
+        
 
 
     </script>

@@ -21,7 +21,7 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
     socket.on('start', function () {
-        socket.emit('nick', "guest" + incr)
+        socket.emit('nick', "guest" + incr);
         clients[clients.indexOf(socket)].n = "guest" + incr;
         incr++;
         io.emit('users', getUsers());
