@@ -1,39 +1,132 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <title>Socket.IO chat</title>
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-      #messages { margin-bottom: 40px }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 13px Helvetica, Arial;
+        }
+
+        form {
+            background: #000;
+            padding: 3px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+            form input {
+                border: 0;
+                padding: 10px;
+                width: 90%;
+                margin-right: .5%;
+            }
+
+            form button {
+                width: 9%;
+                background: rgb(130, 224, 255);
+                border: none;
+                padding: 10px;
+            }
+
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            #messages li {
+                padding: 5px 10px;
+            }
+
+                #messages li:nth-child(odd) {
+                    background: #eee;
+                }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            width: calc(100% - 200px);
+        }
+
+        section {
+            flex: 4;
+        }
+
+        footer {
+            flex: auto;
+        }
+
+        aside {
+            flex: 1;
+        }
     </style>
-  </head>
-  <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+</head>
+<body>
+    <div id="container">
+        <section>
+            <ul id="messages"></ul>
+        </section>
+        <footer>
+            <form action="">
+                <input id="m" autocomplete="off" /><button>Send</button>
+            </form>
+        </footer>
+    </div>
+    <aside>
+        <p>Users</p>
+        <ul id="ulist"></ul>
+    </aside>
+
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      $(function () {
+        var users = [];
+        var myNick = "";
         var socket = io();
-        $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
+
+        socket.on("connect", function (e) {
+            socket.emit("start");
         });
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-          window.scrollTo(0, document.body.scrollHeight);
+        socket.on('nick', function (nick) {
+            myNick = nick;
         });
-      });
+
+        socket.on('chat message', function (msg) {
+            $("#messages").append("<li><b>" + msg[0] + ":</b> " + msg[1]);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+
+        socket.on('info', function (inf) {
+            $('#messages').append('<li><i>' + inf + '</i></li>');
+        });
+
+        function updateUsers(u) {
+            var linst = document.getElementById("ulist");
+            item.innerHTML = "";
+
+            for (var i = 0; i < u.length; i++) {
+                var item = document.createElement("li");
+                item.innerHTML = u[i];
+                list.appendChild(item);
+            }
+        }
+
+        $('form').submit(function () {
+            var temp = [myNick, $("#m").val()];
+            socket.emit('chat message', temp);
+            $('#m').val('');
+            return false;
+        });
+
+
     </script>
-  </body>
+</body>
 </html>
