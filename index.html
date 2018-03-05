@@ -19,6 +19,15 @@
             flex-flow: row wrap
         }
 
+        h1{
+            background: #307336;
+            color: #E43293;
+            text-align: center;
+            font: 20px Helvetica, Arial;
+            padding: 10px
+
+        }
+
         form {
             background: #000;
             bottom: 0;
@@ -34,7 +43,7 @@
 
             form button {
                 width: 9%;
-                background: rgb(130, 224, 255);
+                background: #E43293;
                 border: none;
                 padding: 10px;
             }
@@ -50,7 +59,7 @@
             }
 
                 #messages li:nth-child(odd) {
-                    background: #eee;
+                    background: #9BB291;
                 }
 
         #container {
@@ -60,32 +69,37 @@
         }
 
         section {
-            flex: 4;
+            flex: 7;
+            background: #E5FBEA;
         }
 
         footer {
             flex: 1;
+            background: #E5FBEA;
+            vertical-align: middle;
         }
 
         aside {
             flex: 1;
+            background: #9BB291;
         }
     </style>
 </head>
 <body>
     <div id="container">
         <section>
-            <p>Messages</p>
+            <h1>Messages</h1>
             <ul id="messages"></ul>
         </section>
         <footer>
             <form action="">
-                <input id="m" autocomplete="off" /><button>Send</button>
+                <input id="m" autocomplete="off" /><button>SEND</button>
             </form>
         </footer>
     </div>
     <aside>
-        <p>Users</p>
+        <h1>Users</h1>
+
         <ul id="ulist"></ul>
     </aside>
 
