@@ -116,6 +116,10 @@
             $('#messages').append('<li><i>' + inf + '</i></li>');
         });
 
+        socket.on('users', function (users) {
+            updateUsers(users);
+        });
+
         function updateUsers(u) {
             var linst = document.getElementById("ulist");
             item.innerHTML = "";

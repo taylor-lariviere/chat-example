@@ -38,9 +38,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function () {
-        if (clients[clients.indexOf(socket)].n == null) {
-
-        }
+        if (clients[clients.indexOf(socket)].n == null) {}
         else {
             io.emit('info', "User " + clients[clients.indexOf(socket)].n + " disconnected.");
         }
