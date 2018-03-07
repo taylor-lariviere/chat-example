@@ -35,6 +35,11 @@
             padding: 5px
         }
 
+        .scrollable{
+            height: auto;
+            overflow-y: auto;
+        }
+
         form {
             background: #000;
             bottom: 0;
@@ -101,7 +106,9 @@
         <section>
             <h1>Messages</h1>
             <h2 id="nickname"></h2>
-            <ul id="messages"></ul>
+            <div class="scrollable">
+                <ul id="messages"></ul>
+            </div>
         </section>
         <footer>
             <form action="">
