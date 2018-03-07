@@ -68,6 +68,10 @@
             width: calc(100% - 200px);
         }
 
+        #ulist {
+            list-style-type: none;
+        }
+
         section {
             flex: 7;
             background: #E5FBEA;
@@ -89,6 +93,7 @@
     <div id="container">
         <section>
             <h1>Messages</h1>
+            <p id="nickname"></p>
             <ul id="messages"></ul>
         </section>
         <footer>
@@ -113,8 +118,10 @@
         socket.on("connect", function (e) {
             socket.emit("start");
         });
+
         socket.on('nick', function (nick) {
             myNick = nick;
+            document.getElementById("nickname").innerHTML = myNick;
         });
 
         $('form').submit(function () {
