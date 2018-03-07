@@ -63,7 +63,6 @@
 
             #messages li {
                 padding: 5px 10px;
-              
             }
 
                 #messages li:nth-child(odd) {
@@ -74,20 +73,14 @@
             display: flex;
             flex-direction: column;
             width: calc(100% - 200px);
-            height: 100%;
         }
 
         #ulist {
             list-style-type: none;
         }
 
-        header{
-            flex:1;
-        }
-
         section {
-            flex: 6;
-            overflow: auto;
+            flex: 7;
             background: #E5FBEA;
         }
 
@@ -105,11 +98,9 @@
 </head>
 <body>
     <div id="container">
-        <header>
+        <section>
             <h1>Messages</h1>
             <h2 id="nickname"></h2>
-        </header>
-        <section>
             <ul id="messages"></ul>
         </section>
         <footer>
