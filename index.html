@@ -63,8 +63,7 @@
 
             #messages li {
                 padding: 5px 10px;
-                height: auto;
-                overflow-y: auto;
+              
             }
 
                 #messages li:nth-child(odd) {
@@ -81,8 +80,13 @@
             list-style-type: none;
         }
 
+        header{
+            flex:1;
+        }
+
         section {
             flex: 7;
+            overflow: auto;
             background: #E5FBEA;
         }
 
@@ -100,9 +104,11 @@
 </head>
 <body>
     <div id="container">
-        <section>
+        <header>
             <h1>Messages</h1>
             <h2 id="nickname"></h2>
+        </header>
+        <section>
             <ul id="messages"></ul>
         </section>
         <footer>
