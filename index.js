@@ -1,6 +1,6 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var app = require("express")();
+var http = require("http").Server(app);
+var io = require("socket.io")(http);
 var port = process.env.PORT || 3000;
 
 var clients = [];
@@ -15,53 +15,53 @@ function getUsers() {
     return users;
 }
 
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+app.get("/", function (req, res) {
+    res.sendFile(__dirname + "/index.html");
 });
 
-io.on('connection', function (socket) {
+io.on("connection", function (socket) {
     clients.push(socket);
 
-    socket.on('start', function () {
-        socket.emit('nick', "guest" + incr);
+    socket.on("start", function () {
+        socket.emit("nick", "guest" + incr);
 
-        var histStr = ""
-        var histArr = history.toarray()
+        var histStr = "";
+        var histArr = history.toarray();
         for (var i = 0; i < histArr.length; i++) {
             histStr += ("<li><b>" + histArr[i][0] + ":</b> " + histArr[i][1] + "</li>");
         }
         if (histStr != "") {
-            socket.emit('history', histStr)
+            socket.emit("history", histStr);
         }
 
         clients[clients.indexOf(socket)].n = "guest" + incr;
         incr++;
-        io.emit('users', getUsers());
+        io.emit("users", getUsers());
     });
 
-    socket.on('send chat message', function (msg) {
-        io.emit('chat message', msg);
+    socket.on("send chat message", function (msg) {
+        io.emit("chat message", msg);
         history.enq(msg)
     });
 
-    socket.on('set nick', function (nick) {
-        io.emit('info', "New user: " + nick);
+    socket.on("set nick", function (nick) {
+        io.emit("info", "New user: " + nick);
         clients[clients.indexOf(socket)].n = nick;
-        io.emit('users', getUsers());
+        io.emit("users", getUsers());
     });
 
-    socket.on('disconnect', function () {
+    socket.on("disconnect", function () {
         if (clients[clients.indexOf(socket)].n == null) { }
         else {
-            io.emit('info', "User " + clients[clients.indexOf(socket)].n + " disconnected.");
+            io.emit("info", "User " + clients[clients.indexOf(socket)].n + " disconnected.");
         }
         clients.splice(clients.indexOf(socket), 1);
-        io.emit('users', getUsers());
+        io.emit("users", getUsers());
     });
 });
 
 http.listen(port, function () {
-    console.log('listening on *:' + port);
+    console.log("listening on *:" + port);
 });
 
 // from https://github.com/tomsmeding/circular-buffer/blob/master/index.js
