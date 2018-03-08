@@ -29,7 +29,7 @@ io.on('connection', function (socket) {
         for (var i = 0; i < histArr.length; i++) {
             histStr += ("<li><b>" + histArr[i][0] + ":</b> " + histArr[i][1] + "</li>");
         }
-        socet.emit('history', histStr)
+        socket.emit('history', histStr)
         clients[clients.indexOf(socket)].n = "guest" + incr;
         incr++;
         io.emit('users', getUsers());
