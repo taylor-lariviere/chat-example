@@ -4,7 +4,28 @@ var io = require("socket.io")(http);
 var port = process.env.PORT || 3000;
 
 // from https://github.com/tomsmeding/circular-buffer/blob/master/index.js
-CircularBuffer.prototype = {
+
+function CircularBuffer(capacity) {
+    if (!(this instanceof CircularBuffer)) return new CircularBuffer(capacity);
+    if (typeof capacity == "object" &&
+        Array.isArray(capacity["_buffer"]) &&
+        typeof capacity._capacity == "number" &&
+        typeof capacity._first == "number" &&
+        typeof capacity._size == "number") {
+        for (var prop in capacity) {
+            if (capacity.hasOwnProperty(prop)) this[prop] = capacity[prop];
+        }
+    } else {
+        if (typeof capacity != "number" || capacity % 1 != 0 || capacity < 1)
+            throw new TypeError("Invalid capacity");
+        this._buffer = new Array(capacity);
+        this._capacity = capacity;
+        this._first = 0;
+        this._size = 0;
+    }
+}
+
+var CiruclarBuffer = CircularBuffer.prototype = {
     size: function () { return this._size; },
     capacity: function () { return this._capacity; },
     enq: function (value) {
@@ -90,7 +111,7 @@ io.on("connection", function (socket) {
         for (var i = 0; i < histArr.length; i++) {
             histStr += ("<li><b>" + histArr[i][0] + ":</b> " + histArr[i][1] + "</li>");
         }
-        if (histStr != "")  {
+        if (histStr != "") {
             socket.emit("history", histStr);
             console.log("history sent");
         }
