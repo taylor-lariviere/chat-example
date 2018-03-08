@@ -37,7 +37,7 @@
         }
 
         form {
-            background: #000;
+            background: #307336;
             bottom: 0;
             width: 100%;
         }
@@ -64,10 +64,10 @@
             overflow-y: scroll;
         }
 
-        #messages {    
+        #messages {
             list-style-type: none;
             margin: 0;
-            padding: 0;     
+            padding: 0;
         }
 
             #messages li {
@@ -77,6 +77,10 @@
                 #messages li:nth-child(odd) {
                     background: #9BB291;
                 }
+
+        #messages, #message-container {
+            transform: scale(1,-1)
+        }
 
         #container {
             display: flex;
@@ -89,7 +93,7 @@
             list-style-type: none;
         }
 
-        #messages, #message-container{ transform: scale(1,-1)}
+
         section {
             height: calc(100% - 70px);
             max-height: calc(100vh - 70px);
@@ -142,6 +146,13 @@
         socket.on('nick', function (nick) {
             myNick = nick;
             document.getElementById("nickname").innerHTML = myNick;
+        });
+
+        socket.on('history', function (history) {
+            for (var i = 0; i < history.length; i++) {
+                $("#messages").append("<li><b>" + history[i][0] + ":</b> " + history[i][1] + "</li>");
+            }
+            window.scrollTo(0, document.body.scrollHeight);
         });
 
         $('form').submit(function () {
