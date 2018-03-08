@@ -149,9 +149,7 @@
         });
 
         socket.on('history', function (history) {
-            for (var i = 0; i < history.length; i++) {
-                $("#messages").append("<li><b>" + history[i][0] + ":</b> " + history[i][1] + "</li>");
-            }
+            $('#messages').innerHTML = history;
             window.scrollTo(0, document.body.scrollHeight);
         });
 

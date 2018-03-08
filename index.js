@@ -24,7 +24,12 @@ io.on('connection', function (socket) {
 
     socket.on('start', function () {
         socket.emit('nick', "guest" + incr);
-        socet.emit('history', history.toarray())
+        var histStr = ""
+        var histArr = history.toarray()
+        for (var i = 0; i < histArr.length; i++) {
+            histStr += ("<li><b>" + histArr[i][0] + ":</b> " + histArr[i][1] + "</li>");
+        }
+        socet.emit('history', histStr)
         clients[clients.indexOf(socket)].n = "guest" + incr;
         incr++;
         io.emit('users', getUsers());
