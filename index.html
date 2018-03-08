@@ -56,15 +56,18 @@
                 padding: 10px;
             }
 
-        #messages {
+        #message-container {
             display: flex;
             flex-direction: column;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            height: calc(100% - 200px);
+            height: calc(100% - 120px);
             min-height: 200px;
             overflow-y: scroll;
+        }
+
+        #messages {    
+            list-style-type: none;
+            margin: 0;
+            padding: 0;     
         }
 
             #messages li {
