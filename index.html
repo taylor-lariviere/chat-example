@@ -86,8 +86,7 @@
             list-style-type: none;
         }
 
-        #messages, .scroll {transform: scale(1,-1)}
-
+        #messages, #message-container{ transform: scale(1,-1)}
         section {
             height: calc(100% - 70px);
             max-height: calc(100vh - 70px);
@@ -110,7 +109,9 @@
         <section>
             <h1>Messages</h1>
             <h2 id="nickname"></h2>
-            <ul id="messages"></ul>
+            <div id="message-container">
+                <ul id="messages"></ul>
+            </div>
         </section>
         <footer>
             <form action="">
