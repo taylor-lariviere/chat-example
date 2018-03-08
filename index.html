@@ -7,6 +7,7 @@
             height: 100%;
             box-sizing: border-box;
         }
+
         *, *:before, *:after {
             box-sizing: inherit;
         }
@@ -19,14 +20,14 @@
             flex-flow: row wrap;
         }
 
-        h1{
+        h1 {
             background: #307336;
             color: #E43293;
             text-align: center;
             font: 20px Helvetica, Arial;
             padding: 10px
-
         }
+
         h2 {
             background: #307336;
             color: #E43293;
@@ -56,14 +57,14 @@
             }
 
         #messages {
-            display:flex;
-            flex-direction: column;
+            display: flex;
+            flex-direction: column-reverse;
             list-style-type: none;
             margin: 0;
             padding: 0;
             height: calc(100% - 200px);
             min-height: 200px;
-            overflow-y:auto;
+            overflow-y: auto;
         }
 
             #messages li {
