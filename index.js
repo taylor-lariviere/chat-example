@@ -24,6 +24,7 @@ io.on('connection', function (socket) {
 
     socket.on('start', function () {
         socket.emit('nick', "guest" + incr);
+
         var histStr = ""
         var histArr = history.toarray()
         for (var i = 0; i < histArr.length; i++) {
@@ -32,6 +33,7 @@ io.on('connection', function (socket) {
         if (histStr != "") {
             socket.emit('history', histStr)
         }
+
         clients[clients.indexOf(socket)].n = "guest" + incr;
         incr++;
         io.emit('users', getUsers());
@@ -49,7 +51,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function () {
-        if (clients[clients.indexOf(socket)].n == null) {}
+        if (clients[clients.indexOf(socket)].n == null) { }
         else {
             io.emit('info', "User " + clients[clients.indexOf(socket)].n + " disconnected.");
         }
