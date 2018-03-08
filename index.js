@@ -126,7 +126,7 @@ io.on("connection", function (socket) {
 
     socket.on("send chat message", function (msg) {
         io.emit("chat message", msg);
-        history.enq(msg)
+        history.pushS(msg)
     });
 
     socket.on("set nick", function (nick) {
