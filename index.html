@@ -151,7 +151,7 @@
         socket.on('history', function (history) {
             console.log("recieved history")
             console.log("history: " + history)
-            $('#messages').appendChild(history);
+            $('#messages').append(history);
             window.scrollTo(0, document.body.scrollHeight);
         });
 
