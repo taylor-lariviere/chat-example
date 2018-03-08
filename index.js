@@ -9,8 +9,8 @@ var incr = 1;
 
 function getUsers() {
     var users = [];
-    for (var i = 0; i < clients.length; i++) {
-        users[i] = clients[i].n;
+    for (var k = 0; k < clients.length; k++) {
+        users[k] = clients[k].n;
     }
     return users;
 }
@@ -25,6 +25,7 @@ io.on("connection", function (socket) {
     socket.on("start", function () {
         socket.emit("nick", "guest" + incr);
         console.log("nickname sent")
+        
 
         var histStr = "";
         var histArr = history.toarray();
