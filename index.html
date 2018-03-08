@@ -58,13 +58,13 @@
 
         #messages {
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
             list-style-type: none;
             margin: 0;
             padding: 0;
             height: calc(100% - 200px);
             min-height: 200px;
-            overflow-y: auto;
+            overflow-y: scroll;
         }
 
             #messages li {
@@ -85,6 +85,8 @@
         #ulist {
             list-style-type: none;
         }
+
+        #messages, .scroll {transform: scale(1,1)}
 
         section {
             height: calc(100% - 70px);
