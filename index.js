@@ -108,7 +108,7 @@ io.on("connection", function (socket) {
         console.log("nickname sent");
 
         var histArr = history.toarray();
-        socket.emit("history", histArr)
+        socket.emit("history", histArr);
 
         clients[clients.indexOf(socket)].n = "guest" + incr;
         incr++;

@@ -156,8 +156,16 @@
         });
 
         $('form').submit(function () {
-            var temp = [myNick, $("#m").val()];
-            socket.emit('send chat message', temp);
+            var m = $("#m").val();
+            var temp = [myNick, m];
+            if (m.startsWith("/")){
+                command = m.split(" ")[0].slice(1);
+                argument = m.split(" ")[1];
+                processCommand(command, argument)
+            }
+            else {
+                socket.emit('send chat message', temp);
+            }
             $('#m').val('');
             return false;
         });
@@ -169,7 +177,7 @@
         });
 
         socket.on('info', function (inf) {
-            $('#messages').append('<li><i>' + inf + '</i></li>');
+            $('#messages').append(formatInfoMessage(inf));
             window.scrollTo(0, document.body.scrollHeight);
         });
 
@@ -177,20 +185,28 @@
             updateUsers(users);
         });
 
+        function formatInfoMessage(msg) {
+            return '<li><i>' + inf + '</i></li>';
+        }
+
         function formatChatMessage(msg) {
             var msgStr = "";
             var datestamp = new Date(msg[2]);
-            console.log("datestamp: " + typeof datestamp + " " + datestamp)
+            console.log("datestamp: " + typeof datestamp + " " + datestamp);
             if (msg[0] == myNick) {
                 var msgStr = "<li style='background: #9BB291;'>";
 
             }
             else {
-                var msgStr = "<li>"
+                var msgStr = "<li>";
             }
-            msgStr += "<i>" + datestamp.toLocaleTimeString('en-GB') + " </i><b>" + msg[0] + ":</b> " + msg[1] + "</li>";
+            msgStr += "<i>" + datestamp.toLocaleTimeString('en-GB') + "  </i><b>" + msg[0] + ":</b> " + msg[1] + "</li>";
 
             return msgStr;
+        }
+
+        function setMyNick(newNick) {
+            socket.emit("set nick", newNick)
         }
 
         function updateUsers(u) {
@@ -201,6 +217,16 @@
                 var item = document.createElement("li");
                 item.innerHTML = u[i];
                 list.appendChild(item);
+            }
+        }
+
+        function processCommand(command, arg) {
+            switch (command) {
+                case "nick":
+                    setMyNick(arg);
+                    break;
+                default:
+                    $('#messages').append(formatInfoMessage("Unknown Command: " + command));
             }
         }
     </script>
