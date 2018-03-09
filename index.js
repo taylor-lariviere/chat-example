@@ -128,6 +128,7 @@ io.on("connection", function (socket) {
     socket.on("set nick", function (nick) {
         io.emit("info", "New user: " + nick);
         clients[clients.indexOf(socket)].n = nick;
+        socket.emit("nick", nick);
         io.emit("users", getUsers());
     });
 
