@@ -177,6 +177,7 @@
         });
 
         function formatChatMessage(msg) {
+            console.log("message recieved: " + msg)
             var msgStr = "";
             var datestamp = msg[2];
             if (msg[0] == myNick) {
