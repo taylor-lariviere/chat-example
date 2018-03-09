@@ -74,10 +74,6 @@
                 padding: 5px 10px;
             }
 
-                #messages li:nth-child(odd) {
-                    background: #9BB291;
-                }
-
         #messages, #message-container {
             transform: scale(1,-1)
         }
@@ -181,7 +177,14 @@
         });
 
         function formatChatMessage(msg) {
-            var msgStr = "<li><b>" + msg[0] + ":</b> " + msg[1] + "</li>"
+            var msgStr = ""
+            if (msg[0] == myNick) {
+                var msgStr = "<li style='background: #307336;'><b>" + msg[0] + ":</b> " + msg[1] + "</li>"
+            }
+            else {
+                var msgStr = "<li><b>" + msg[0] + ":</b> " + msg[1] + "</li>"
+            }
+
             return msgStr
         }
 
