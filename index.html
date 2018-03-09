@@ -180,7 +180,7 @@
         function formatChatMessage(msg) {
             var msgStr = "";
             var datestamp = msg[2];
-            console.log("datestamp: " + datestamp)
+            console.log("datestamp: " + typeof datestamp + " " + datestamp)
             if (msg[0] == myNick) {
                 var msgStr = "<li style='background: #9BB291;'>";
 
