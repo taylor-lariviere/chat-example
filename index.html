@@ -158,9 +158,13 @@
         $('form').submit(function () {
             var m = $("#m").val();
             var temp = [myNick, m];
-            if (m.startsWith("/")){
-                command = m.split(" ")[0].slice(1);
-                argument = m.split(" ")[1];
+            if (m.startsWith("/")) {
+                var command, arguement = ""
+                try {
+                    command = m.split(" ")[0].slice(1);
+                    argument = m.split(" ")[1];
+                }
+                catch (err) {}
                 processCommand(command, argument)
             }
             else {
