@@ -117,7 +117,8 @@ io.on("connection", function (socket) {
     });
 
     socket.on("send chat message", function (msg) {
-        io.emit("chat message", msg);
+        serverTime = new Date()
+        io.emit("chat message", msg.push(serverTime));
         history.push(msg);
     });
 

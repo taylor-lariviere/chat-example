@@ -177,15 +177,18 @@
         });
 
         function formatChatMessage(msg) {
-            var msgStr = ""
+            var msgStr = "";
+            datestamp = msg[2];
             if (msg[0] == myNick) {
-                var msgStr = "<li style='background: #307336;'><b>" + msg[0] + ":</b> " + msg[1] + "</li>"
+                var msgStr = "<li style='background: #9BB291;'>";
+
             }
             else {
-                var msgStr = "<li><b>" + msg[0] + ":</b> " + msg[1] + "</li>"
+                var msgStr = "<li>"
             }
+            msgStr += "<div><b>" + msg[0] + ":</b> " + msg[1] + "</div><div style='float: right;'>" + datestamp.getHours() + ":" + datestamp.getMinutes() + "</div></li>";
 
-            return msgStr
+            return msgStr;
         }
 
         function updateUsers(u) {
