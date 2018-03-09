@@ -117,10 +117,11 @@ io.on("connection", function (socket) {
     });
 
     socket.on("send chat message", function (msg) {
-        var serverTime = new Date()
-        msg.push(serverTime)
+        var serverTime = new Date();
+        msg.push(serverTime);
+        console.log(typeof msg[2]);
         io.emit("chat message", msg);
-        console.log("message going out: " + msg)
+        console.log("message going out: " + msg);
         history.push(msg);
     });
 
