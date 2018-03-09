@@ -149,9 +149,13 @@
         });
 
         socket.on('history', function (history) {
-            console.log("recieved history")
-            console.log("history: " + history)
-            $('#messages').append(history);
+            console.log("recieved history");
+            console.log("history: " + history);
+            var histStr = "";
+            for (message of history) {
+                histStr += formatChatMessage(message);
+            }
+            $('#messages').append(histStr);
             window.scrollTo(0, document.body.scrollHeight);
         });
 
@@ -163,7 +167,7 @@
         });
 
         socket.on('chat message', function (msg) {
-            $("#messages").append("<li><b>" + msg[0] + ":</b> " + msg[1] + "</li>");
+            $("#messages").append(msg);
             window.scrollTo(0, document.body.scrollHeight);
         });
 
@@ -175,6 +179,11 @@
         socket.on('users', function (users) {
             updateUsers(users);
         });
+
+        function formatChatMessage(msg) {
+            var msgStr = "<li><b>" + msg[0] + ":</b> " + msg[1] + "</li>"
+            return msgStr
+        }
 
         function updateUsers(u) {
             var list = document.getElementById("ulist");

@@ -107,16 +107,8 @@ io.on("connection", function (socket) {
         socket.emit("nick", "guest" + incr);
         console.log("nickname sent");
 
-        var histStr = "";
         var histArr = history.toarray();
-        console.log("assembling history");
-        for (var i = 0; i < histArr.length; i++) {
-            histStr += ("<li><b>" + histArr[i][0] + ":</b> " + histArr[i][1] + "</li>");
-        }
-        if (histStr != "") {
-            socket.emit("history", histStr);
-            console.log("history sent");
-        }
+        socket.emit("history", histArr)
 
         clients[clients.indexOf(socket)].n = "guest" + incr;
         incr++;
@@ -126,7 +118,7 @@ io.on("connection", function (socket) {
 
     socket.on("send chat message", function (msg) {
         io.emit("chat message", msg);
-        history.push(msg)
+        history.push(msg);
     });
 
     socket.on("set nick", function (nick) {
