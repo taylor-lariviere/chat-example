@@ -163,6 +163,7 @@
         });
 
         socket.on('chat message', function (msg) {
+            console.log("message recieved: " + msg)
             $("#messages").append(formatChatMessage(msg));
             window.scrollTo(0, document.body.scrollHeight);
         });
@@ -177,9 +178,9 @@
         });
 
         function formatChatMessage(msg) {
-            console.log("message recieved: " + msg)
             var msgStr = "";
             var datestamp = msg[2];
+            console.log("datestamp: " + datestamp)
             if (msg[0] == myNick) {
                 var msgStr = "<li style='background: #9BB291;'>";
 
