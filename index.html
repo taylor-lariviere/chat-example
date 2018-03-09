@@ -188,7 +188,7 @@
             else {
                 var msgStr = "<li>"
             }
-            msgStr += "<div><b>" + msg[0] + ":</b> " + msg[1] + "</div><div style='float: right;'>" + "17:13" + "</div></li>";
+            msgStr += "<div><b>" + msg[0] + ":</b> " + msg[1] + "</div><div style='float: right;'>" + datestamp.getHours() + ":" + datestamp.getMinutes() + "</div></li>";
 
             return msgStr;
         }
