@@ -118,9 +118,10 @@ io.on("connection", function (socket) {
 
     socket.on("send chat message", function (msg) {
         serverTime = new Date()
-        io.emit("chat message", msg.push(serverTime));
-        console.log("message going out: " + msg)
-        history.push(msg);
+        out = msg.push(serverTime)
+        io.emit("chat message", out);
+        console.log("message going out: " + out)
+        history.push(out);
     });
 
     socket.on("set nick", function (nick) {
