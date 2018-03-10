@@ -133,6 +133,7 @@
     <script>
         var users = [];
         var myNick = "";
+        var myNickColour = "";
         var socket = io();
 
         socket.on("connect", function (e) {
@@ -140,7 +141,7 @@
         });
 
         socket.on('nick', function (nick) {
-            myNick = nick;
+            myNick = nick[0];
             document.getElementById("nickname").innerHTML = myNick;
         });
 
@@ -189,6 +190,10 @@
             updateUsers(users);
         });
 
+        function formatUsername(name) {
+            return "<b style= 'color: " + name[1] + ";'>" + name[0] + "<b>"
+        }
+
         function formatInfoMessage(msg) {
             return '<li><i>' + msg + '</i></li>';
         }
@@ -199,18 +204,17 @@
             console.log("datestamp: " + typeof datestamp + " " + datestamp);
             if (msg[0] == myNick) {
                 var msgStr = "<li style='background: #9BB291;'>";
-
             }
             else {
                 var msgStr = "<li>";
             }
-            msgStr += "<i>" + datestamp.toLocaleTimeString('en-GB') + "  </i><b>" + msg[0] + ":</b> " + msg[1] + "</li>";
+            msgStr += "<i>" + datestamp.toLocaleTimeString('en-GB') + "  </i>" + formatUsername(msg[0]) + ": " + msg[1] + "</li>";
 
             return msgStr;
         }
 
         function setMyNick(newNick) {
-            socket.emit("set nick", newNick)
+            socket.emit("set nick", newNick);
         }
 
         function updateUsers(u) {
@@ -219,7 +223,7 @@
 
             for (var i = 0; i < u.length; i++) {
                 var item = document.createElement("li");
-                item.innerHTML = u[i];
+                item.innerHTML = formatUsername(u[i]);
                 list.appendChild(item);
             }
         }

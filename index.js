@@ -104,13 +104,14 @@ io.on("connection", function (socket) {
     clients.push(socket);
 
     socket.on("start", function () {
-        socket.emit("nick", "guest" + incr);
+        username = ["guest" + incr, "#000000"];
+        socket.emit("nick", username);
         console.log("nickname sent");
 
         var histArr = history.toarray();
         socket.emit("history", histArr);
 
-        clients[clients.indexOf(socket)].n = "guest" + incr;
+        clients[clients.indexOf(socket)].n = username;
         incr++;
         io.emit("users", getUsers());
         console.log("users sent");
@@ -127,7 +128,13 @@ io.on("connection", function (socket) {
 
     socket.on("set nick", function (nick) {
         io.emit("info", "New user: " + nick);
-        clients[clients.indexOf(socket)].n = nick;
+        clients[clients.indexOf(socket)].n[0] = nick;
+        socket.emit("nick", nick);
+        io.emit("users", getUsers());
+    });
+
+    socket.on("set colour", function (colour) {
+        clients[clients.indexOf(socket)].n[1] = colour;
         socket.emit("nick", nick);
         io.emit("users", getUsers());
     });
