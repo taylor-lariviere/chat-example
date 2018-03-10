@@ -132,7 +132,11 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
         var users = [];
+<<<<<<< HEAD
         var myNick = [];
+=======
+        var myNick = "";
+>>>>>>> parent of f50d7af... colour attempt
         var socket = io();
 
         socket.on("connect", function (e) {
@@ -141,7 +145,11 @@
 
         socket.on('nick', function (nick) {
             myNick = nick;
+<<<<<<< HEAD
             document.getElementById("nickname").innerHTML = myNick[0];
+=======
+            document.getElementById("nickname").innerHTML = myNick;
+>>>>>>> parent of f50d7af... colour attempt
         });
 
         socket.on('history', function (history) {
@@ -189,10 +197,13 @@
             updateUsers(users);
         });
 
+<<<<<<< HEAD
         function formatUsername(name) {
             return "<b style= 'color: " + name[1] + ";'>" + name[0] + "</b>"
         }
 
+=======
+>>>>>>> parent of f50d7af... colour attempt
         function formatInfoMessage(msg) {
             return '<li><i>' + msg + '</i></li>';
         }
@@ -203,17 +214,18 @@
             console.log("datestamp: " + typeof datestamp + " " + datestamp);
             if (msg[0] == myNick) {
                 var msgStr = "<li style='background: #9BB291;'>";
+
             }
             else {
                 var msgStr = "<li>";
             }
-            msgStr += "<i>" + datestamp.toLocaleTimeString('en-GB') + "  </i>" + formatUsername(msg[0]) + ": " + msg[1] + "</li>";
+            msgStr += "<i>" + datestamp.toLocaleTimeString('en-GB') + "  </i><b>" + msg[0] + ":</b> " + msg[1] + "</li>";
 
             return msgStr;
         }
 
         function setMyNick(newNick) {
-            socket.emit("set nick", newNick);
+            socket.emit("set nick", newNick)
         }
 
         function setMyColour(newColour) {
@@ -226,7 +238,7 @@
 
             for (var i = 0; i < u.length; i++) {
                 var item = document.createElement("li");
-                item.innerHTML = formatUsername(u[i]);
+                item.innerHTML = u[i];
                 list.appendChild(item);
             }
         }
