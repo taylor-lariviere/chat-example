@@ -132,8 +132,7 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
         var users = [];
-        var myNick = "";
-        var myNickColour = "";
+        var myNick = [];
         var socket = io();
 
         socket.on("connect", function (e) {
@@ -141,8 +140,8 @@
         });
 
         socket.on('nick', function (nick) {
-            myNick = nick[0];
-            document.getElementById("nickname").innerHTML = myNick;
+            myNick = nick;
+            document.getElementById("nickname").innerHTML = myNick[0];
         });
 
         socket.on('history', function (history) {
