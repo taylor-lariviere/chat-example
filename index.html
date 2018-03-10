@@ -132,11 +132,7 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
         var users = [];
-<<<<<<< HEAD
-        var myNick = [];
-=======
         var myNick = "";
->>>>>>> parent of f50d7af... colour attempt
         var socket = io();
 
         socket.on("connect", function (e) {
@@ -145,11 +141,7 @@
 
         socket.on('nick', function (nick) {
             myNick = nick;
-<<<<<<< HEAD
-            document.getElementById("nickname").innerHTML = myNick[0];
-=======
             document.getElementById("nickname").innerHTML = myNick;
->>>>>>> parent of f50d7af... colour attempt
         });
 
         socket.on('history', function (history) {
@@ -197,13 +189,6 @@
             updateUsers(users);
         });
 
-<<<<<<< HEAD
-        function formatUsername(name) {
-            return "<b style= 'color: " + name[1] + ";'>" + name[0] + "</b>"
-        }
-
-=======
->>>>>>> parent of f50d7af... colour attempt
         function formatInfoMessage(msg) {
             return '<li><i>' + msg + '</i></li>';
         }
@@ -228,10 +213,6 @@
             socket.emit("set nick", newNick)
         }
 
-        function setMyColour(newColour) {
-            socket.emit("set colour", newColour)
-        }
-
         function updateUsers(u) {
             var list = document.getElementById("ulist");
             list.innerHTML = "";
@@ -247,9 +228,6 @@
             switch (command) {
                 case "nick":
                     setMyNick(arg);
-                    break;
-                case "nickcolor":
-                    setMyColour(arg);
                     break;
                 default:
                     $('#messages').append(formatInfoMessage("Unknown Command: " + command));
