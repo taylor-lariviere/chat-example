@@ -191,7 +191,7 @@
         });
 
         function formatUsername(name) {
-            return "<b style= 'color: " + name[1] + ";'>" + name[0] + "<b>"
+            return "<b style= 'color: " + name[1] + ";'>" + name[0] + "</b>"
         }
 
         function formatInfoMessage(msg) {
@@ -217,6 +217,10 @@
             socket.emit("set nick", newNick);
         }
 
+        function setMyColour(newColour) {
+            socket.emit("set colour", newColour)
+        }
+
         function updateUsers(u) {
             var list = document.getElementById("ulist");
             list.innerHTML = "";
@@ -232,6 +236,9 @@
             switch (command) {
                 case "nick":
                     setMyNick(arg);
+                    break;
+                case "nickcolor":
+                    setMyColour(arg);
                     break;
                 default:
                     $('#messages').append(formatInfoMessage("Unknown Command: " + command));
