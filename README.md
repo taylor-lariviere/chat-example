@@ -1,3 +1,5 @@
+An school assignment in which I desperately attempted to learn javascript. The original README follows.
+
 # chat-example
 
 This is the source code for a very simple chat example used for
